@@ -1,10 +1,6 @@
-# StepicPageObjectModelProject
-Selenium + POM with Python Stepik full course (https://stepik.org/course/575)
-
-
 # Проект курса Stepik по Selenium Python + POM
-![Uploading image.png…]()
-
+ 
+Ссылка на курс: [Клик](https://stepik.org/course/575).
 
 Проект, разработанный в рамках курса Stepik по автоматизации тестирования с использованием Selenium и паттерна Page Object Model (POM).
 
@@ -14,6 +10,11 @@ Selenium + POM with Python Stepik full course (https://stepik.org/course/575)
 - Selenium
 - PyTest
 - WebdriverManager
+
+Структура проекта
+tests/ - директория с тестовыми файлами
+pages/ - директория с классами страниц (Page Object Model)
+conftest.py - файл конфигурации для инициализации драйвера
 
 ## Установка и настройка
 
