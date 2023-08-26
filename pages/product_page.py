@@ -30,7 +30,6 @@ class ProductPage(BasePage):
     def should_be_product_name_message_match_product_name_card(self):
         product_name_in_message = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE)
         product_name_in_card = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_CARD)
-
         assert product_name_in_message.text == product_name_in_card.text, \
             LOGGER.error(
                 'Product name added to the basket not match product name on the product card.'f'{product_name_in_message.text} should match {product_name_in_card.text}')
@@ -46,7 +45,6 @@ class ProductPage(BasePage):
     def should_be_equal_basket_price_in_message_and_product_prise(self):
         basket_price_in_message = self.browser.find_element(*ProductPageLocators.BASKET_COST_IN_MESSAGE)
         product_price_in_card = self.browser.find_element(*ProductPageLocators.COST_OF_PRODUCT)
-
         assert basket_price_in_message.text == product_price_in_card.text, LOGGER.error(
             f'Product cost on the card should be equal basket cost. '
             f'{basket_price_in_message.text} should match {product_price_in_card.text}')
