@@ -3,8 +3,8 @@ Selenium + POM with Python Stepik full course (https://stepik.org/course/575)
 
 
 # Проект курса Stepik по Selenium Python + POM
+![Uploading image.png…]()
 
-![Project Preview](path_to_image_or_screenshot.png)
 
 Проект, разработанный в рамках курса Stepik по автоматизации тестирования с использованием Selenium и паттерна Page Object Model (POM).
 
