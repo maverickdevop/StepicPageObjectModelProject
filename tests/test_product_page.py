@@ -4,7 +4,38 @@ from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
 from pages.login_page import LoginPage
 
-# PAGE LINKS
+
+@pytest.mark.user_tests_with_registartion
+class TestUserAddToBasketFromProductPage:
+
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/'
+        page = ProductPage(browser, link)
+        new_user_email = str(time.time()) + "@fakemail.org"
+        new_user_paswd = 'strong_pass1'
+        page.open()
+        page.go_to_login_page()
+        login_page = LoginPage(browser, browser.current_url)
+        login_page.register_new_user(new_user_email, new_user_paswd)
+        login_page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
+        page = ProductPage(browser, link, timeout=0)
+        page.open()
+        page.should_not_be_success_message()
+
+    @pytest.mark.need_review
+    def test_user_can_add_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_basket()
+        page.should_not_be_disappeared_button_add_to_basket()
+        page.should_be_correct_work_of_basket()
+
+
 LINK = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 COMMON_URL = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
 
@@ -52,7 +83,7 @@ def test_guest_cant_see_success_message(browser):
     page.should_not_be_success_message()
 
 
-@pytest.mark.xfail(reason='Negative check #3')
+@pytest.mark.xfail(reason='Negative check 3')
 @pytest.mark.negative
 def test_message_disappeared_after_adding_product_to_basket(browser):
     page = ProductPage(browser, LINK, timeout=0)
@@ -90,34 +121,3 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser, browser.current_url)
     basket_page.should_not_be_product_list_if_basket_is_empty()
     basket_page.should_be_notification_about_empty_basket_if_basket_is_empty()
-
-
-@pytest.mark.user_tests_with_registartion
-class TestUserAddToBasketFromProductPage:
-
-    @pytest.fixture(scope="function", autouse=True)
-    def setup(self, browser):
-        link = 'http://selenium1py.pythonanywhere.com/'
-        page = ProductPage(browser, link)
-        new_user_email = str(time.time()) + "@fakemail.org"
-        new_user_paswd = 'strong_pass1'
-        page.open()
-        page.go_to_login_page()
-        login_page = LoginPage(browser, browser.current_url)
-        login_page.register_new_user(new_user_email, new_user_paswd)
-        login_page.should_be_authorized_user()
-
-    def test_user_cant_see_success_message(self, browser):
-        link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
-        page = ProductPage(browser, link, timeout=0)
-        page.open()
-        page.should_not_be_success_message()
-
-    @pytest.mark.need_review
-    def test_user_can_add_product_to_basket(self, browser):
-        link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
-        page = ProductPage(browser, link)
-        page.open()
-        page.add_to_basket()
-        page.should_not_be_disappeared_button_add_to_basket()
-        page.should_be_correct_work_of_basket()
