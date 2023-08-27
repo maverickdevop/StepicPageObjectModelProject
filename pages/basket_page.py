@@ -10,7 +10,8 @@ class BasketPage(BasePage):
             *BasketPageLocators.NOTIFICATION_EMPTY_BASKET), LOGGER.error(f'No notification about empty basket on {self.url} page, but should be')
 
     def should_not_be_product_list_if_basket_is_empty(self):
-        assert self.is_not_element_present(*BasketPageLocators.BASKET_LIST), LOGGER.error(f'Product list is presented, but shouldn\'t be on {self.url} page')
+        assert self.is_not_element_present(
+            *BasketPageLocators.BASKET_LIST), LOGGER.error(f'Product list is presented, but shouldn\'t be on {self.url} page')
 
     def should_be_product_list_if_basket_is_not_empty(self):
         assert self.is_element_present(
