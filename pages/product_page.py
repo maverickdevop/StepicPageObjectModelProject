@@ -24,15 +24,13 @@ class ProductPage(BasePage):
 
     def should_be_message_of_added_product(self):
         assert self.is_element_present(
-            *ProductPageLocators.MESSAGE_WITH_PRODUCT_NAME), LOGGER.error(
-            f'No message of added product on {self.url} page')
+            *ProductPageLocators.MESSAGE_WITH_PRODUCT_NAME), LOGGER.error(f'No message of added product on {self.url} page')
 
     def should_be_product_name_message_match_product_name_card(self):
         product_name_in_message = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE)
         product_name_in_card = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_CARD)
         assert product_name_in_message.text == product_name_in_card.text, \
-            LOGGER.error(
-                'Product name added to the basket not match product name on the product card.'f'{product_name_in_message.text} should match {product_name_in_card.text}')
+            LOGGER.error('Product name added to the basket not match product name on the product card.'f'{product_name_in_message.text} should match {product_name_in_card.text}')
 
     def should_be_match_of_product_cost_and_basket_in_message(self):
         self.should_be_message_of_basket_total()
