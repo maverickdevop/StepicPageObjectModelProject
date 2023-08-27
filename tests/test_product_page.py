@@ -13,7 +13,7 @@ class TestUserAddToBasketFromProductPage:
         link = 'http://selenium1py.pythonanywhere.com/'
         page = ProductPage(browser, link)
         new_user_email = str(time.time()) + "@fakemail.org"
-        new_user_paswd = 'strong_pass1'
+        new_user_paswd = 'test_password'
         page.open()
         page.go_to_login_page()
         login_page = LoginPage(browser, browser.current_url)
@@ -49,7 +49,7 @@ PROMO_LINKS = [
     COMMON_URL + '6',
     pytest.param(
         COMMON_URL + '7',
-        marks=pytest.mark.xfail(reason='Product name added to the basket not match product name on the product card.')
+        marks=pytest.mark.xfail(reason='Different names card and basket title!')
     ),
     COMMON_URL + '8',
     COMMON_URL + '9'
@@ -83,7 +83,7 @@ def test_guest_cant_see_success_message(browser):
     page.should_not_be_success_message()
 
 
-@pytest.mark.xfail(reason='Negative check 3')
+@pytest.mark.xfail(reason='Negative check #3')
 @pytest.mark.negative
 def test_message_disappeared_after_adding_product_to_basket(browser):
     page = ProductPage(browser, LINK, timeout=0)
