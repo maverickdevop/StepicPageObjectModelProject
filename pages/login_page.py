@@ -9,10 +9,13 @@ class LoginPage(BasePage):
         self.should_be_valid_registration_form()
         email_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL)
         email_field.send_keys(email)
+        
         paswd_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_PASWD)
         paswd_field.send_keys(password)
+        
         paswd_confirm_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_CONFIRM_PASWD)
         paswd_confirm_field.send_keys(password)
+        
         button_register = self.browser.find_element(*LoginPageLocators.BUTTON_REGISTER)
         button_register.click()
 
@@ -26,7 +29,8 @@ class LoginPage(BasePage):
             LOGGER.error('Current URL should be http://selenium1py.pythonanywhere.com/en-gb/accounts/login/')
 
     def should_be_login_form(self):
-        assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), LOGGER.error(f'There is no login form on {self.url} page.')
+        assert self.is_element_present(
+            *LoginPageLocators.LOGIN_FORM), LOGGER.error(f'There is no login form on {self.url} page.')
 
     def should_be_register_form(self):
         assert self.is_element_present(
